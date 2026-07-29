@@ -18,6 +18,6 @@ class Barang extends Model
 
     public function jenis()
     {
-        return $this->belongsTo(Jenis::class, 'jenis_id', 'id');
+        return $this->belongsTo(Jenis::class, 'id_jenis', 'id');
     }
 }

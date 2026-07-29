@@ -126,13 +126,10 @@
                             <li class="item">
                                 <div class="product-info ml-2">
                                     <a href="{{ route('jenis.index') }}" class="product-title">
-                                        {{ $jenis->nama }}
-                                        <span class="badge badge-success float-right">
-                                            {{ $jenis->barangs_count ?? 0 }} Item
-                                        </span>
+                                        {{ $jenis->jenis_barang ?? $jenis->nama_jenis ?? $jenis->nama }}
                                     </a>
                                     <span class="product-description">
-                                        {{ $jenis->keterangan ?? 'Tidak ada deskripsi' }}
+                                        {{ $jenis->keterangan ?? $jenis->deskripsi ?? 'Kategori terdaftar' }}
                                     </span>
                                 </div>
                             </li>

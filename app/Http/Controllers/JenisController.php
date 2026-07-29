@@ -23,8 +23,7 @@ class JenisController extends Controller
     public function create()
     {
         //
-        $jenis = Jenis::all();
-        return view('jenis.create', compact('jenis'));
+        return view('jenis.create');
     }
 
     /**
@@ -36,6 +35,9 @@ class JenisController extends Controller
         $request->validate([
             'jenis_barang' => 'required',
         ]);
+
+        Jenis::create($request->all());
+        return redirect()->route('jenis.index')->with('success', 'Jenis created successfully.');
     }
 
     /**
@@ -62,9 +64,12 @@ class JenisController extends Controller
     public function update(Request $request, Jenis $jenis)
     {
         //
-        @$request->validate([
+        $request->validate([
             'jenis_barang' => 'required',
         ]);
+
+        $jenis->update($request->all());
+        return redirect()->route('jenis.index')->with('success', 'Jenis updated successfully.');
     }
 
     /**

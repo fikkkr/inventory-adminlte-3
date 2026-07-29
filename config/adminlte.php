@@ -323,7 +323,7 @@ return [
         ['header' => 'MENU UTAMA'],
         [
             'text' => 'Dashboard',
-            'url' => 'admin/dashboard',
+            'route' => 'dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
         ],  
         [

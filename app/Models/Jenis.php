@@ -12,4 +12,9 @@ class Jenis extends Model
     protected $fillable = [
         'jenis_barang',
     ];
+
+    public function barang()
+    {
+        return $this->hasMany(Barang::class, 'id_jenis', 'id');
+    }
 }
