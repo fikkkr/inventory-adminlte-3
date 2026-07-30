@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Jenis;
+use App\Models\BarangMasuk;
+use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,6 +16,9 @@ class DashboardController extends Controller
         $totalJenis  = Jenis::count();
         $totalStok   = Barang::sum('stok_barang');
 
+        $totalBarangMasuk = BarangMasuk::sum('jumlah_masuk');
+        $totalBarangKeluar = BarangKeluar::sum('jumlah_keluar');
+
         $barangTerbaru = Barang::latest()->take(5)->get();
 
         $jenisTerbaru = Jenis::latest()->take(5)->get();
@@ -22,6 +27,8 @@ class DashboardController extends Controller
             'totalBarang',
             'totalJenis',
             'totalStok',
+            'totalBarangMasuk',
+            'totalBarangKeluar',
             'barangTerbaru',
             'jenisTerbaru'
         ));

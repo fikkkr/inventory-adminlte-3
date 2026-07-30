@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard Analytics</h1>
+    <h1>Dashboard Inventaris</h1>
 @stop
 
 @section('content')
@@ -57,6 +57,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Box Total Barang Masuk -->
+    <div class="row">
+        <div class="col-lg-4 col-12">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $totalBarangMasuk }}</h3>
+                    <p>Barang Masuk</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-box-in"></i>
+                </div>
+                <a href="{{ route('barangMasuk.index') }}" class="small-box-footer">
+                    Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Box Total Barang Keluar -->
+        <div class="col-lg-4 col-12">
+            <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ $totalBarangKeluar }}</h3>
+                <p>Barang Keluar</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-box-open"></i>
+            </div>
+            <a href="{{ route('barangKeluar.index') }}" class="small-box-footer">
+                Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
 
     {{-- BARIS 2: TABEL RINGKASAN DATA TERBARU --}}
     <div class="row">

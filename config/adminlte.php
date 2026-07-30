@@ -320,25 +320,31 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        ['header' => 'MENU UTAMA'],
         [
-            'text' => 'Dashboard',
-            'route' => 'dashboard',
+            'text' => 'dashboard',
+            'url' => '/dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
-        ],  
+        ],
+        ['header' => 'Menu'],
         [
-            'text' => 'Menu',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Tabel Barang',
-                    'url' => '/barang',
-                ],
-                [
-                    'text' => 'Tabel Jenis Barang',
-                    'url' => '/jenis',
-                ],
-            ],
+            'text' => 'Tabel barang',
+            'url' => '/barang',
+            'icon' => 'fas fa-fw fa-boxes',
+        ],
+        [
+            'text' => 'Tabel jenis',
+            'url' => '/jenis',
+            'icon' => 'fas fa-fw fa-tags',
+        ],
+        [
+            'text' => 'Tabel barang masuk',
+            'url' => '/barangMasuk',
+            'icon' => 'fas fa-fw fa-arrow-down',
+        ],
+        [
+            'text' => 'Tabel barang keluar',
+            'url' => '/barangKeluar',
+            'icon' => 'fas fa-fw fa-arrow-up',
         ],
     ],
 
