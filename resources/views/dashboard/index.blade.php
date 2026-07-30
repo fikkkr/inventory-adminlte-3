@@ -7,93 +7,91 @@
 @stop
 
 @section('content')
-    {{-- BARIS 1: INFO BOXES / STATISTIK --}}
-    <div class="row">
-        <!-- Box Total Barang -->
-        <div class="col-lg-4 col-6">
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{ $totalBarang }}</h3>
-                    <p>Total Item Barang</p>
+    {{-- Statistik singkat (Info boxes) --}}
+    <section aria-label="Statistik cepat">
+        <div class="row">
+            <div class="col-md-4 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $totalBarang }}</h3>
+                        <p>Total Item Barang</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <a href="{{ route('barang.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
-                <div class="icon">
-                    <i class="fas fa-boxes"></i>
+            </div>
+
+            <div class="col-md-4 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ $totalJenis }}</h3>
+                        <p>Jenis / Kategori Barang</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <a href="{{ route('jenis.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
-                <a href="{{ route('barang.index') }}" class="small-box-footer">
-                    Lihat Detail <i class="fas fa-arrow-circle-right"></i>
-                </a>
+            </div>
+
+            <div class="col-md-4 col-12">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>{{ number_format($totalStok) }}</h3>
+                        <p>Total Stok Keseluruhan</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <a href="{{ route('barang.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- Box Total Jenis Barang -->
-        <div class="col-lg-4 col-6">
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>{{ $totalJenis }}</h3>
-                    <p>Jenis / Kategori Barang</p>
+        <div class="row mt-3">
+            <div class="col-md-4 col-sm-6 col-12">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $totalBarangMasuk }}</h3>
+                        <p>Barang Masuk</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <a href="{{ route('barangMasuk.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
-                <div class="icon">
-                    <i class="fas fa-tags"></i>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-12">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalBarangKeluar }}</h3>
+                        <p>Barang Keluar</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <a href="{{ route('barangKeluar.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
-                <a href="{{ route('jenis.index') }}" class="small-box-footer">
-                    Lihat Detail <i class="fas fa-arrow-circle-right"></i>
-                </a>
             </div>
         </div>
+    </section>
 
-        <!-- Box Total Stok Keseluruhan -->
-        <div class="col-lg-4 col-12">
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>{{ number_format($totalStok) }}</h3>
-                    <p>Total Stok Keseluruhan</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-warehouse"></i>
-                </div>
-                <a href="{{ route('barang.index') }}" class="small-box-footer">
-                    Lihat Detail <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Box Total Barang Masuk -->
-    <div class="row">
-        <div class="col-lg-4 col-12">
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{ $totalBarangMasuk }}</h3>
-                    <p>Barang Masuk</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-box-in"></i>
-                </div>
-                <a href="{{ route('barangMasuk.index') }}" class="small-box-footer">
-                    Lihat Detail <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-
-        <!-- Box Total Barang Keluar -->
-        <div class="col-lg-4 col-12">
-            <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>{{ $totalBarangKeluar }}</h3>
-                <p>Barang Keluar</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-box-open"></i>
-            </div>
-            <a href="{{ route('barangKeluar.index') }}" class="small-box-footer">
-                Lihat Detail <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
-
-    {{-- BARIS 2: TABEL RINGKASAN DATA TERBARU --}}
-    <div class="row">
+    {{-- Ringkasan data terbaru (tabel dan daftar) --}}
+    <section aria-label="Ringkasan data terbaru" class="mt-4">
+        <div class="row">
         <!-- Tabel Barang Terbaru -->
         <div class="col-lg-7">
             <div class="card card-outline card-primary">
