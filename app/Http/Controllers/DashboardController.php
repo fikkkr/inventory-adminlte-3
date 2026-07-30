@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
         $jenisTerbaru = Jenis::latest()->take(5)->get();
 
-        return view('dashboard', compact(
+        return view('dashboard.index', compact(
             'totalBarang',
             'totalJenis',
             'totalStok',
