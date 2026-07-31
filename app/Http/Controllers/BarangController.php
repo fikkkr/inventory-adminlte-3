@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-use App\Models\Jenis; // Panggil model Jenis di atas
+use App\Models\Jenis;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -24,8 +24,8 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id_jenis' => 'required|exists:jenis,id',
             'nama_barang' => 'required',
-            'jenis_id' => 'required', // Sebaiknya gunakan jenis_id (foreign key)
             'harga_barang' => 'required|numeric',
             'stok_barang' => 'required|numeric',
         ]);

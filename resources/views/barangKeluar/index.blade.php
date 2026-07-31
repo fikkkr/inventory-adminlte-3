@@ -31,8 +31,8 @@
                         @forelse ($barangKeluar as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->nama_barang }}</td>
-                                <td>{{ $item->jumlah }}</td>
+                                <td>{{ $item->barang ? $item->barang->nama_barang : '-' }}</td>
+                                <td>{{ $item->jumlah_keluar }}</td>
                                 <td>{{ $item->tanggal_keluar }}</td>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-sm" role="group">

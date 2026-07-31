@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('barang_keluars', function (Blueprint $table) {
+        Schema::create('barangKeluars', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('id_barang');
+            $table->foreignId('id_barang')->constrained('barang')->onDelete('cascade');
             $table->integer('jumlah_keluar');
             $table->date('tanggal_keluar');
         });

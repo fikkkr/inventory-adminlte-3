@@ -2,81 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
 
 class BarangMasukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
-        $barangMasuk = BarangMasuk::all();
+        $barangMasuk = BarangMasuk::with('barang')->get();
+
         return view('barangMasuk.index', compact('barangMasuk'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
-        return view('barangMasuk.create');
+        $barangs = Barang::all();
+
+        return view('barangMasuk.create', compact('barangs'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
         $request->validate([
-            'id_barang' => 'required',
-            'jumlah_masuk' => 'required|numeric',
+            'id_barang' => 'required|exists:barang,id',
+            'jumlah_masuk' => 'required|numeric|min:1',
             'tanggal_masuk' => 'required|date',
         ]);
+
+        BarangMasuk::create($request->all());
+
+        return redirect()->route('barangMasuk.index')->with('success', 'Data barang masuk berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(BarangMasuk $barangMasuk)
     {
-        //
         return view('barangMasuk.show', compact('barangMasuk'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(BarangMasuk $barangMasuk)
     {
-        //
-        return view('barangMasuk.edit', compact('barangMasuk'));
+        $barangs = Barang::all();
+
+        return view('barangMasuk.edit', compact('barangMasuk', 'barangs'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, BarangMasuk $barangMasuk)
     {
-        //
         $request->validate([
-            'id_barang' => 'required',
-            'jumlah_masuk' => 'required|numeric',
+            'id_barang' => 'required|exists:barang,id',
+            'jumlah_masuk' => 'required|numeric|min:1',
             'tanggal_masuk' => 'required|date',
         ]);
+
+        $barangMasuk->update($request->all());
+
+        return redirect()->route('barangMasuk.index')->with('success', 'Data barang masuk berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(BarangMasuk $barangMasuk)
     {
-        //
         $barangMasuk->delete();
-        return redirect()->route('barangMasuk.index')->with('success', 'Barang Masuk deleted successfully');
+
+        return redirect()->route('barangMasuk.index')->with('success', 'Data barang masuk berhasil dihapus.');
     }
 }

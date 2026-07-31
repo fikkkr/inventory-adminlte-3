@@ -33,7 +33,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->nama_barang }}</td>
-                                <td>{{ $item->jenis_barang }}</td>
+                                <td>{{ $item->jenis ? $item->jenis->jenis_barang : '-' }}</td>
                                 <td>Rp {{ number_format($item->harga_barang, 0, ',', '.') }}</td>
                                 <td>{{ $item->stok_barang }}</td>
                                 <td class="text-center">

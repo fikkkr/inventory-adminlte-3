@@ -15,7 +15,7 @@ class BarangSeeder extends Seeder
         //
         \App\Models\Barang::create([
             'nama_barang' => 'Laptop',
-            'jenis_barang' => 'Elektronik',
+            'id_jenis' => 1,
             'harga_barang' => 10000000,
             'stok_barang' => 10,
         ]);
