@@ -26,6 +26,7 @@ class BarangMasukController extends Controller
     {
         $request->validate([
             'id_barang' => 'required|exists:barang,id',
+            'nama_barang_masuk' => 'required|string|max:255',
             'jumlah_masuk' => 'required|numeric|min:1',
             'tanggal_masuk' => 'required|date',
         ]);
@@ -51,6 +52,7 @@ class BarangMasukController extends Controller
     {
         $request->validate([
             'id_barang' => 'required|exists:barang,id',
+            'nama_barang_masuk' => 'required|string|max:255',
             'jumlah_masuk' => 'required|numeric|min:1',
             'tanggal_masuk' => 'required|date',
         ]);
