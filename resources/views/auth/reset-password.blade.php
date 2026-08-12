@@ -1,39 +1,76 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
+@extends('adminlte::auth.auth-page', ['authType' => 'login'])
+
+@section('auth_header', __('adminlte::adminlte.password_reset_message'))
+
+@section('auth_body')
+    <form action="{{ route('password.store') }}" method="post">
         @csrf
 
-        <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="input-group mb-3">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                value="{{ old('email', $request->email) }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                placeholder="{{ __('adminlte::adminlte.password') }}">
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+        <div class="input-group mb-3">
+            <input type="password" name="password_confirmation"
+                class="form-control @error('password_confirmation') is-invalid @enderror"
+                placeholder="{{ __('adminlte::adminlte.retype_password') }}">
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            @error('password_confirmation')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
+        <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+            <span class="fas fa-sync-alt"></span>
+            {{ __('adminlte::adminlte.reset_password') }}
+        </button>
     </form>
-</x-guest-layout>
+@stop
+
+@section('auth_footer')
+    <p class="my-0">
+        <a href="{{ route('login') }}">
+            {{ __('adminlte::adminlte.i_already_have_a_membership') }}
+        </a>
+    </p>
+@stop

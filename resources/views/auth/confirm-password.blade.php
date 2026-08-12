@@ -1,27 +1,62 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('adminlte::master')
+
+@section('adminlte_css')
+    @yield('css')
+@stop
+
+@section('classes_body', 'lockscreen')
+
+@section('body')
+    <div class="lockscreen-wrapper">
+
+        <div class="lockscreen-logo">
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset(config('adminlte.logo_img')) }}" height="50">
+                {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+            </a>
+        </div>
+
+        <div class="lockscreen-name">
+            {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}
+        </div>
+
+        <div class="lockscreen-item">
+            <form method="POST" action="{{ route('password.confirm') }}" class="lockscreen-credentials @if(! config('adminlte.usermenu_image')) ml-0 @endif">
+                @csrf
+
+                <div class="input-group">
+                    <input id="password" type="password" name="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        placeholder="{{ __('adminlte::adminlte.password') }}" required autofocus>
+
+                    <div class="input-group-append">
+                        <button type="submit" class="btn">
+                            <i class="fas fa-arrow-right text-muted"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        @error('password')
+            <div class="lockscreen-subitem text-center" role="alert">
+                <b class="text-danger">{{ $message }}</b>
+            </div>
+        @enderror
+
+        <div class="help-block text-center">
+            {{ __('adminlte::adminlte.confirm_password_message') }}
+        </div>
+
+        <div class="text-center">
+            <a href="{{ route('password.request') }}">
+                {{ __('adminlte::adminlte.i_forgot_my_password') }}
+            </a>
+        </div>
     </div>
+@stop
 
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@section('adminlte_js')
+    @stack('js')
+    @yield('js')
+@stop
